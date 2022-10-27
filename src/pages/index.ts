@@ -1,2 +1,2 @@
-export * from './main'
+export * from './search-page'
 export * from './router'
