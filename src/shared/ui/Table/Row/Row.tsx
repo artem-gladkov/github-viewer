@@ -1,8 +1,9 @@
-import {FC, MouseEvent} from 'react'
+import {FC, MouseEvent, useMemo} from 'react'
 
 import styles from './Row.module.scss'
 import {Cell, TableCellValue} from '../Cell';
 import {TableColumn} from "../TableHeader";
+import classNames from 'classnames';
 
 export interface RowProps {
   key: string
@@ -14,14 +15,20 @@ export interface RowProps {
 }
 
 export const Row: FC<RowProps> = (rowProps) => {
-  const {key, onClick, cells, columns} = rowProps
+  const {onClick, cells, columns} = rowProps
 
-  let rowCells: TableCellValue[] = []
+  const rowCells = useMemo(() => {
+    return Object.entries(cells).reduce((accum: TableCellValue[], [key, value]) => {
+      const cellIndex = columns.findIndex(col => key === col.accessor)
 
-  Object.entries(cells).forEach(([key, value]) => {
-    const cellIndex = columns.findIndex(col => key === col.accessor)
-    rowCells[cellIndex] = value
-  })
+      if (cellIndex !== -1) {
+        accum[cellIndex] = value
+      }
+
+      return accum
+    }, [])
+  }, [cells, columns])
+
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation()
@@ -29,9 +36,12 @@ export const Row: FC<RowProps> = (rowProps) => {
   }
 
   return (
-    <div key={key} className={styles.row} onClick={handleClick}>
+    <div
+      className={classNames(styles.row, {[styles.clickable]: !!onClick})}
+      onClick={handleClick}
+    >
       {rowCells.map((cell, cellIndex) =>
-        <Cell key={`${key}_${cellIndex}`}>{cell}</Cell>
+        <Cell key={`${cellIndex}`}>{cell}</Cell>
       )}
     </div>
   )

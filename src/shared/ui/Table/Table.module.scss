@@ -1,9 +1,11 @@
 .table {
-  @apply grid grid-cols-1 grid-rows-[minmax(50px,_max-contetn)_1fr] gap-4
+  @apply grid grid-cols-1 grid-rows-[auto_1fr] gap-4 w-full h-full
 }
 
-
-
 .body {
-  @apply grid gap-2 grid-cols-1;
+  @apply grid gap-2 grid-cols-1 w-full h-full  rounded  grid auto-rows-max ;
+
+  &.empty {
+    @apply auto-rows-fr
+  }
 }

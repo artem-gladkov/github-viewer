@@ -1,18 +1,21 @@
-import {FC, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {UserInfoView} from "../../features/show-user-info";
 import {RepositoriesList} from "../../features/show-repositories";
 
 import styles from './UserPage.module.scss'
-import {useParams} from "react-router-dom";
+import {Outlet, useParams} from "react-router-dom";
 import {UserStore} from "../../entities/user";
-import {Loader} from "../../shared";
+import {Empty, Loader} from "../../shared";
 import {observer} from 'mobx-react-lite';
 import {UserSearchForm} from '../../features/search-user';
 
 export const UserPage: FC = observer(() => {
-  //TODO ''
   const {username = ''} = useParams<{ username: string }>()
-  const [{isUserExist, isFetching, baseUserInfo}] = useState(() => new UserStore(username))
+  const [{isUserExist, isFetching, baseUserInfo, updateUser}] = useState(() => new UserStore(username))
+
+  useEffect(() => {
+    updateUser(username)
+  }, [username])
 
   return (
     <div className={styles.page}>
@@ -23,9 +26,9 @@ export const UserPage: FC = observer(() => {
           : isUserExist
             ? <div className={styles.body}>
               <UserInfoView userInfo={baseUserInfo}/>
-              <RepositoriesList username={username}/>
+              <Outlet/>
             </div>
-            : <div>Пользователя не существует</div>
+            : <Empty text={`Увы, пользователя с ником "${username}" не существует :с`} />
       }
     </div>
   )

@@ -1,7 +1,11 @@
 .row {
-  @apply grid grid-cols-[repeat(auto-fit,minmax(50px,_1fr))] grid-rows-1 bg-slate-200 py-2 rounded shadow hover:shadow-md cursor-pointer;
+  @apply grid grid-cols-[repeat(auto-fit,minmax(50px,_1fr))] grid-rows-1 bg-slate-200 py-2 rounded shadow transition-shadow;
 
   &:nth-child(2n) {
     @apply bg-slate-100;
+  }
+
+  &.clickable {
+    @apply hover:shadow-md cursor-pointer transition-shadow
   }
 }

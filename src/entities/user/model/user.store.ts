@@ -11,10 +11,20 @@ export class UserStore {
   constructor(private _username: string) {
     makeAutoObservable(this)
 
-    this.init()
+    this.updateUser(_username)
   }
 
-  private init = async (): Promise<void> => {
+  public updateUser = (newUserName: string) => {
+    this._username = newUserName
+    this.resetUserData()
+    this.fetchUserData()
+  }
+
+  private resetUserData = () => {
+    this.userData = undefined
+  }
+
+  private fetchUserData = async (): Promise<void> => {
     this.isFetching = true
 
     try {
@@ -27,6 +37,7 @@ export class UserStore {
     }
   }
 
+
   public get baseUserInfo(): BaseUserInfo {
     return !!this._userData ? {
         avatarImage: this._userData.avatar_url,
@@ -34,7 +45,7 @@ export class UserStore {
       } : DEFAULT_USER_INFO
   }
 
-  private set userData(value: UserData) {
+  private set userData(value: UserData | undefined) {
     this._userData = value
   }
 

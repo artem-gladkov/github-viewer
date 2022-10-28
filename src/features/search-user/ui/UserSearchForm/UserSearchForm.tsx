@@ -3,11 +3,8 @@ import classNames from 'classnames'
 
 import styles from './UserSearchForm.module.scss'
 import {observer} from "mobx-react-lite";
-import {UserSearchStore} from "../../model";
 import {Button, Input} from "../../../../shared";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {PATHS} from "../../../../pages/router/constants";
-
 
 export enum ESearchParams {
   TEXT = 'text'
@@ -22,11 +19,8 @@ export const UserSearchForm: FC<UserSearchFormProps> = observer(({
   ...otherProps
 }) => {
   const [urlSearchParams, setUrlSearchParams] = useSearchParams()
+  const [searchText, setSearchText] = useState(urlSearchParams.get(ESearchParams.TEXT) || '')
   const navigate = useNavigate()
-  const [{
-    searchText,
-    updateSearchText
-  }] = useState(() => new UserSearchStore(urlSearchParams.get(ESearchParams.TEXT)))
 
   const onChangeSearchText = useCallback((value: string): void => {
     const newUrlSearchParams = new URLSearchParams()
@@ -36,13 +30,13 @@ export const UserSearchForm: FC<UserSearchFormProps> = observer(({
     }
 
     setUrlSearchParams(newUrlSearchParams)
-    updateSearchText(value)
-  }, [setUrlSearchParams, updateSearchText])
+    setSearchText(value)
+  }, [setUrlSearchParams, setSearchText])
 
-  const onSubmitSearchForm = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmitSearchForm = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    navigate(`/users/${searchText}?${urlSearchParams}`, {replace: true})
-  }
+    navigate(`/users/${searchText}/repositories?${urlSearchParams}`)
+  }, [navigate, urlSearchParams, searchText])
 
   return (
     <form

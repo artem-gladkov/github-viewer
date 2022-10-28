@@ -1,13 +1,15 @@
 import {makeAutoObservable, toJS} from "mobx";
 import {fetchUserPublicRepositories, Repository} from "../../../entities/repository";
 import {TableRow} from "../../../shared";
+import {NavigateFunction} from "react-router-dom";
+import {PATHS} from "../../../pages/router/constants";
 
 export class RepositoriesListStore {
   private _repositories: Repository[] = []
 
   private _isFetching: boolean = true
 
-  constructor(private _username: string) {
+  constructor(private _username: string, private _navigate: NavigateFunction) {
     makeAutoObservable(this)
 
     this.init()
@@ -18,7 +20,6 @@ export class RepositoriesListStore {
 
     try {
       this.repositories = await fetchUserPublicRepositories(this._username)
-      console.log(toJS(this._repositories))
     } catch (e) {
       // TODO log
       console.log(e)
@@ -40,12 +41,10 @@ export class RepositoriesListStore {
   }
 
   public get tableRows(): TableRow[] {
-    return this._repositories.map(({name, language, stargazers_count, description}) => {
-      console.log()
-      return {
+    return this._repositories.map(({name, language, stargazers_count, description}) => ({
       key: name,
-      onClick: (row) => {
-        console.log(row)
+      onClick: () => {
+        this._navigate(`/users/${this._username}/${name}/commits`)
       },
       cells: {
         title: name,
@@ -53,6 +52,6 @@ export class RepositoriesListStore {
         languages: language,
         starsCount: stargazers_count
       }
-    }})
+    }))
   }
 }

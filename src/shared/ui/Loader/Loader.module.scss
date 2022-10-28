@@ -1,0 +1,11 @@
+.loader {
+  @apply grid w-full h-full
+}
+
+.body {
+  @apply w-max h-max self-center justify-self-center
+}
+
+.spin {
+  @apply animate-spin h-10 w-10 m-auto
+}

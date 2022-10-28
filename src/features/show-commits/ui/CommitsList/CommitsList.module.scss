@@ -1,8 +1,7 @@
-.repositoriesList {
-  @apply max-h-full h-full;
-}
-
 .wrapper {
   @apply grid grid-rows-[max-content_1fr] gap-4 max-h-full h-full;
 }
 
+.header {
+  @apply grid grid-cols-[max-content_1fr] items-center gap-4
+}

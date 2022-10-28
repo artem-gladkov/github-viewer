@@ -19,7 +19,7 @@ export const UserInfoView: FC<UserInfoProps> = observer(({className, userInfo: {
         <div className={styles.image}>
           <img src={avatarImage} alt={username}/>
         </div>
-        <h2>{username}</h2>
+        <h2>Пользовател: {username}</h2>
       </Widget>
     </div>
   )
