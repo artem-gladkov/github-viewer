@@ -1,25 +1,30 @@
-import {FC, HTMLProps, useCallback, useState} from 'react'
+import {FC, FormEvent, HTMLProps, useCallback, useState} from 'react'
 import classNames from 'classnames'
 
-import styles from './UserSearchString.module.scss'
+import styles from './UserSearchForm.module.scss'
 import {observer} from "mobx-react-lite";
 import {UserSearchStore} from "../../model";
 import {Button, Input} from "../../../../shared";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import {PATHS} from "../../../../pages/router/constants";
 
 
 export enum ESearchParams {
   TEXT = 'text'
 }
 
-export interface UserSearchStringProps extends HTMLProps<HTMLFormElement> {
+export interface UserSearchFormProps extends HTMLProps<HTMLFormElement> {
 }
 
-export const UserSearchString: FC<UserSearchStringProps> = observer(({className, children, ...otherProps}) => {
+export const UserSearchForm: FC<UserSearchFormProps> = observer(({
+  className,
+  children,
+  ...otherProps
+}) => {
   const [urlSearchParams, setUrlSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [{
     searchText,
-    onSubmitSearchForm,
     updateSearchText
   }] = useState(() => new UserSearchStore(urlSearchParams.get(ESearchParams.TEXT)))
 
@@ -34,10 +39,15 @@ export const UserSearchString: FC<UserSearchStringProps> = observer(({className,
     updateSearchText(value)
   }, [setUrlSearchParams, updateSearchText])
 
+  const onSubmitSearchForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    navigate(`/users/${searchText}?${urlSearchParams}`, {replace: true})
+  }
+
   return (
     <form
       onSubmit={onSubmitSearchForm}
-      className={classNames(styles.userSearchString, className)}
+      className={classNames(styles.form, className)}
       {...otherProps}
     >
       <Input

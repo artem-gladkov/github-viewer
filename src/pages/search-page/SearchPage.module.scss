@@ -1,0 +1,11 @@
+.page {
+  @apply grid h-full grid-rows-1 gap-8 items-center
+}
+
+.logo {
+  @apply text-8xl m-auto
+}
+
+.body {
+  @apply grid grid-rows-[max-content_1fr] grid-cols-1 gap-10
+}

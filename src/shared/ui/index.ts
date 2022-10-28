@@ -1,2 +1,6 @@
 export * from './Input'
 export * from './Button'
+export * from './PageLayout'
+export * from './Loader'
+export * from './Table'
+export * from './Widget'

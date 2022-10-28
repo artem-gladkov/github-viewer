@@ -1,5 +1,4 @@
 export enum PATHS {
   MAIN = '/',
-  SEARCH = '/search',
-  profile = '/profile',
+  USERS = '/users/:username',
 }

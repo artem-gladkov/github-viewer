@@ -1,0 +1,7 @@
+.page {
+  @apply grid h-full grid-rows-[max-content_1fr] gap-4
+}
+
+.body {
+  @apply grid grid-rows-[max-content_1fr] grid-cols-1 lg:grid-rows-1 lg:grid-cols-[max-content_minmax(400px,_1fr)] gap-2 h-full
+}

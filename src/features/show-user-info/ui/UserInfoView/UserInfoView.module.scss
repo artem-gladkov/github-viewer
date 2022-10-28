@@ -1,0 +1,11 @@
+.userInfo {
+  @apply max-w-full w-max h-full;
+}
+
+.image {
+  @apply w-80 h-80 rounded-full overflow-hidden mb-8;
+
+  & > img {
+    @apply w-full;
+  }
+}

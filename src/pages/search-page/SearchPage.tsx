@@ -1,10 +1,16 @@
-import { FC } from 'react'
-import {UserSearchString} from "../../features/search-user";
+import {FC} from 'react'
+import {UserSearchForm} from "../../features/search-user";
 
+import styles from './SearchPage.module.scss'
 
 export const SearchPage: FC = () => {
   return (
-    <UserSearchString />
+    <div className={styles.page}>
+      <div className={styles.body}>
+        <h1 className={styles.logo}>Github Viewer</h1>
+        <UserSearchForm/>
+      </div>
+    </div>
   )
 }
 

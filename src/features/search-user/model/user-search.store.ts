@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {FormEvent} from "react";
-import {fetchUser} from "../api";
+import { fetchUser } from "../../../entities/user";
 
 export class UserSearchStore {
   private _searchText: string = ''
@@ -18,11 +18,6 @@ export class UserSearchStore {
     } catch (e) {
       console.log(e)
     }
-  }
-
-  onSubmitSearchForm = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    this.searchUser()
   }
 
   public updateSearchText = (value: string): void => {
