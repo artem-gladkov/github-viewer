@@ -20,7 +20,7 @@ export const Loader: FC<LoaderProps> = ({className, children, text = 'Загру
   )
 }
 
-const SpinSvg = ({}) => {
+const SpinSvg = () => {
   return (
     <svg
       className={styles.spin}

@@ -1,12 +1,10 @@
-import {FC, HTMLProps, useState} from 'react'
+import {FC} from 'react'
 import classNames from 'classnames'
 
 import styles from './UserInfoView.module.scss'
-import {BaseUserInfo, UserStore} from "../../../../entities/user";
-import {Loader, Widget} from '../../../../shared';
+import {BaseUserInfo} from "../../../../entities/user";
+import { Widget} from '../../../../shared';
 import {observer} from "mobx-react-lite";
-import {toJS} from "mobx";
-
 export interface UserInfoProps {
   className?: string,
   userInfo: BaseUserInfo

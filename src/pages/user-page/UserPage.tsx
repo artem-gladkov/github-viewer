@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from 'react'
 import {UserInfoView} from "../../features/show-user-info";
-import {RepositoriesList} from "../../features/show-repositories";
 
 import styles from './UserPage.module.scss'
 import {Outlet, useParams} from "react-router-dom";
@@ -15,7 +14,7 @@ export const UserPage: FC = observer(() => {
 
   useEffect(() => {
     updateUser(username)
-  }, [username])
+  }, [username, updateUser])
 
   return (
     <div className={styles.page}>

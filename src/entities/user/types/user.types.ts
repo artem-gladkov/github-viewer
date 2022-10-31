@@ -1,4 +1,3 @@
-
 export interface BaseUserInfo {
   username: string,
   avatarImage: string

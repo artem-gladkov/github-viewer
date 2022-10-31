@@ -1,4 +1,4 @@
-import {makeAutoObservable, toJS} from "mobx";
+import {makeAutoObservable } from "mobx";
 import {formatDateToISO, TableRow} from "../../../shared";
 import {Commit, fetchRepositoryCommits} from "../../../entities/commit";
 

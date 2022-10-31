@@ -1,4 +1,4 @@
-import {FC, useMemo} from 'react'
+import {FC} from 'react'
 import classNames from 'classnames'
 
 import styles from './Table.module.scss'

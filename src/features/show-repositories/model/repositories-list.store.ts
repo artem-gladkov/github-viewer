@@ -1,8 +1,7 @@
-import {makeAutoObservable, toJS} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {fetchUserPublicRepositories, Repository} from "../../../entities/repository";
 import {TableRow} from "../../../shared";
 import {NavigateFunction} from "react-router-dom";
-import {PATHS} from "../../../pages/router/constants";
 
 export class RepositoriesListStore {
   private _repositories: Repository[] = []

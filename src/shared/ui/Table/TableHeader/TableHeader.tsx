@@ -1,4 +1,4 @@
-import {FC, HTMLProps, useMemo} from 'react'
+import {FC, HTMLProps } from 'react'
 import classNames from 'classnames'
 
 import styles from './TableHeader.module.scss'

@@ -35,7 +35,9 @@ export const UserSearchForm: FC<UserSearchFormProps> = observer(({
 
   const onSubmitSearchForm = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    navigate(`/users/${searchText}/repositories?${urlSearchParams}`)
+    if(searchText && searchText !== '') {
+      navigate(`/users/${searchText}/repositories?${urlSearchParams}`)
+    }
   }, [navigate, urlSearchParams, searchText])
 
   return (
@@ -49,7 +51,7 @@ export const UserSearchForm: FC<UserSearchFormProps> = observer(({
         onChange={onChangeSearchText}
         placeholder='Введите логин пользоваетеля, например, artem-gladkov'
       />
-      <Button type='submit'>
+      <Button type='submit' disabled={!searchText}>
         Найти
       </Button>
     </form>

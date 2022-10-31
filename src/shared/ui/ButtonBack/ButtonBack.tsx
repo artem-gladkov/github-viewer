@@ -1,4 +1,4 @@
-import { FC, HTMLProps} from 'react'
+import { FC } from 'react'
 import classNames from 'classnames'
 
 import styles from './ButtonBack.module.scss'
